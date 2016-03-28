@@ -40,4 +40,14 @@ angular.module('starter.controllers', [])
     $scope.devList.todoList.push({text:todos.todotext, checked:false});
     todos.todotext = '';
   };
+
+  $scope.moveItem = function(item, fromIndex, toIndex) {
+     $scope.devList.todoList.splice(fromIndex, 1);
+    $scope.devList.todoList.splice(toIndex, 0, item);
+  };
+
+  $scope.onItemDelete = function(item) {
+    $scope.devList.todoList.splice($scope.devList.todoList.indexOf(item), 1);
+  };
+
 });

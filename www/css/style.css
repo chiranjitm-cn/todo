@@ -41,3 +41,19 @@
 	padding-left: 5px;
 	padding-right:5px;
 }
+
+/*body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}*/
+
+.done-true {
+	text-decoration: line-through;
+	color: grey;
+	font-size: 14px;
+}
+.done-false {
+	text-decoration: none;
+	color: #000;
+	font-size: 15px;
+}
+

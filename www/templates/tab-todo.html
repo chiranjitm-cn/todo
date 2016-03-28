@@ -1,10 +1,10 @@
 <ion-view view-title="Todo">
-	<ion-content>
+	<ion-content scroll="false">
 		<label class="item item-input">
 			<i class="icon ion-search placeholder-icon"></i>
 			<input type="text" placeholder="Search..." ng-model="search">
 		</label>
-		<div class="bar bar-subheader">
+		<div class="bar-balanced bar-subheader">
 			<div class="button-bar">
 				<a class="button" ng-click="devList.filter=''">All</a>
 				<a class="button" ng-click="devList.filter='true'">Completed</a>
@@ -13,19 +13,21 @@
 		</div>
 		<br>
 		<br>
-		<div class="list">
-			<ion-checkbox ng-repeat="item in devList.todoList | filter : search |filter : devList.filter"
-			ng-model="item.checked" 
-			ng-checked="item.checked">
-			{{ item.text }}
-			</ion-checkbox>
-		</div>
-		<form ng-submit="addTodo(todos)">
-			<label class="item item-input">
-				<input type="text" ng-model="todos.todotext"  size="30" placeholder="add new todo here">
-			</label>
-			<input class="button button-block button-positive" type="submit" value="Add">
-		</form>
+		<ion-scroll delegate-handle="main-list">
+			<ion-list show-delete="true" show-reorder="true" can-swipe="true">
+				<ion-item class="animate-repeat" ng-repeat="item in devList.todoList | filter : search |filter : devList.filter" class="item-remove-animate" item="item"><span class="done-{{item.checked}}">{{item.text}}</span>
+				<input type="checkbox" ng-click="clickItem(item); $event.stopPropagation();" ng-model="item.checked" class="enable-pointer-events visible active">
+					<ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
+					<ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+				</ion-item>
+			</ion-list>
+			<form ng-submit="addTodo(todos)">
+				<label class="item item-input">
+					<input type="text" ng-model="todos.todotext"  size="30" placeholder="add new todo here">
+				</label>
+				<input class="button button-block button-positive" type="submit" value="Add">
+			</form>
+		</ion-scroll>
 	</ion-content>
 </ion-view>
 
